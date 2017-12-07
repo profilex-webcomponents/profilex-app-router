@@ -1,7 +1,13 @@
 <link rel="import" href="/node_modules/@polymer/polymer/polymer-element.html">
 
 <dom-module id="profilex-app-load">
+
     <template>
+        <style>
+        ::slot profilex-app-container {
+            display:none;
+        }
+        </style>
         <slot></slot>
     </template>
 
