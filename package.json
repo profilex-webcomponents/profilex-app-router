@@ -1,0 +1,8 @@
+{
+  "name": "profilex-app-router",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/profilex-webcomponents/profilex-app-router.git",
+  "author": "<balasuresh_varadharajan@trimble.com>",
+  "license": "MIT"
+}
