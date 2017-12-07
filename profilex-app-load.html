@@ -33,10 +33,24 @@
                 super.ready();
                 window.addEventListener("urlchanged", function(e) {
                     var appContainer = document.getElementsByTagName("profilex-app-container");
+                    var matchIndex = null;
                     for (var i = 0; i < appContainer.length; i++) {
                         this.name = appContainer[i].getAttribute('name');
                         appContainer[i].setAttribute("id", 'profilex-app-container-' + i);
-                        if (e.detail.url.endsWith(this.name)) {
+
+                        var regexName = this.name.replace(/(\/)/g, '\\\/');
+                        regexName = regexName.replace(/:(\w+)/, "(\\w+)");
+                        var regexMatch = e.detail.url.match(regexName);
+                        if (this.name.indexOf(":") > -1 && regexMatch && (this.name.split("/").length - 1 == regexMatch.length)) {
+                            //console.log(this.root, Object.getOwnPropertyNames(this.root));
+                            //this.toggleClass("selected", true);
+                            matchIndex = i;
+                        } else if (e.detail.url.endsWith(this.name)) {
+                            matchIndex = i;
+                        }
+                    }
+                    for (var i = 0; i < appContainer.length; i++) {
+                        if (matchIndex != null && matchIndex == i) {
                             //console.log(this.root, Object.getOwnPropertyNames(this.root));
                             //this.toggleClass("selected", true);
                             appContainer[i].classList.add("selected");
@@ -49,6 +63,7 @@
                             appContainer[i].setAttribute('style', 'display:none');
                         }
                     }
+
 
                 }.bind(this));
             }
